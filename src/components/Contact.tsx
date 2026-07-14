@@ -3,7 +3,7 @@ import { config } from "@/lib/config";
 const channels = [
   { label: "Email", value: config.links.email, href: `mailto:${config.links.email}` },
   { label: "LinkedIn", value: "vitaly-zelenov", href: config.links.linkedin },
-  { label: "GitHub", value: "Regative", href: config.links.github },
+  { label: "GitHub", value: "@regat1ve", href: config.links.github },
   { label: "Telegram", value: "@regative", href: config.links.telegram },
 ];
 
