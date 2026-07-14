@@ -12,8 +12,13 @@ export function generateStaticParams(): Params[] {
   return projects.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const p = projects.find((x) => x.slug === params.slug);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const p = projects.find((x) => x.slug === slug);
   if (!p) return {};
   return {
     title: `${p.title} — case study`,
@@ -33,8 +38,13 @@ const statusLabel: Record<string, string> = {
   "open-source": "Open source",
 };
 
-export default function ProjectCaseStudy({ params }: { params: Params }) {
-  const project = projects.find((p) => p.slug === params.slug);
+export default async function ProjectCaseStudy({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
   if (!project) notFound();
 
   return (
