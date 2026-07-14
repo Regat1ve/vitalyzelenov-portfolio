@@ -15,6 +15,9 @@ export function Nav() {
           <Link href="/#methodology" className="hover:text-[color:var(--color-foreground)] transition-colors hidden sm:inline">
             Methodology
           </Link>
+          <Link href="/#faq" className="hover:text-[color:var(--color-foreground)] transition-colors hidden md:inline">
+            FAQ
+          </Link>
           <Link href="/tools/claude-md" className="hover:text-[color:var(--color-foreground)] transition-colors">
             Tools
           </Link>
