@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# vitalyzelenov-portfolio
 
-## Getting Started
+Personal portfolio site for [Vitaly Zelenov](https://www.linkedin.com/in/vitaly-zelenov-8abaa824a/) — full-stack developer shipping real products with Claude Code.
 
-First, run the development server:
+## What's here
+
+- One-page portfolio at `/` — Hero, About, Projects (MedKompas, newforms, CLAUDE.md Generator), Methodology, Contact.
+- Open tool at `/tools/claude-md` — **CLAUDE.md Generator**. Pick your stack + stage, download an opinionated `CLAUDE.md` for your repo.
+
+## Stack
+
+- Next.js 16 (App Router, Server Components by default)
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Geist Sans + Geist Mono
+- Deployed on Vercel
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx                     # one-pager
+│   ├── globals.css
+│   └── tools/
+│       └── claude-md/
+│           └── page.tsx             # CLAUDE.md Generator page
+├── components/
+│   ├── Nav.tsx
+│   ├── Hero.tsx
+│   ├── About.tsx
+│   ├── Projects.tsx
+│   ├── ProjectCard.tsx
+│   ├── Methodology.tsx
+│   ├── Contact.tsx
+│   ├── Footer.tsx
+│   ├── ThemeScript.tsx
+│   ├── ThemeToggle.tsx
+│   └── ClaudeMdGenerator.tsx        # client component
+└── lib/
+    ├── config.ts                    # name, links, contact
+    ├── projects.ts                  # portfolio project data
+    └── claude-md-templates.ts       # stack + stage rule modules
+```
 
-## Learn More
+## Content edits
 
-To learn more about Next.js, take a look at the following resources:
+- **Personal info & links** — `src/lib/config.ts`
+- **Portfolio projects** — `src/lib/projects.ts`
+- **Methodology rules** — `src/components/Methodology.tsx`
+- **CLAUDE.md rules per stack/stage** — `src/lib/claude-md-templates.ts`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Assets to replace
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `public/avatar-placeholder.svg` → real avatar photo
+- `public/projects/medkompas-placeholder.svg` → real MedKompas screenshot
+- `public/projects/newforms-placeholder.svg` → real newforms screenshot
+- `public/projects/claude-md-tool-placeholder.svg` → optional real tool screenshot
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT — see [LICENSE](./LICENSE).
