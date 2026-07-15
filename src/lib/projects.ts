@@ -163,6 +163,7 @@ export const projects: Project[] = [
     links: [
       { label: "Open the tool →", href: "/tools/claude-md" },
       { label: "Read case study →", href: "/projects/claude-md-generator" },
+      { label: "Playbook repo →", href: "https://github.com/Regat1ve/claude-code-playbook" },
     ],
     caseStudy: {
       tagline: "Free tool that generates an opinionated CLAUDE.md for your stack and stage. Runs in the browser, no signup.",
