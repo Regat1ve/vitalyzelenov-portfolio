@@ -47,8 +47,8 @@ export const projects: Project[] = [
       "i18next",
       "Python (ETL)",
     ],
-    image: "/projects/placeholder.jpg",
-    imageAlt: "MedKompas — pre-launch, screenshot pending",
+    image: "/projects/medkompas.jpg",
+    imageAlt: "MedKompas homepage — search bar, region stats, 17 doctors listed",
     links: [
       { label: "Read case study →", href: "/projects/medkompas" },
       { label: "medkompas13.ru →", href: "https://medkompas13.ru" },
@@ -109,8 +109,8 @@ export const projects: Project[] = [
       "TanStack Table",
       "Server Actions",
     ],
-    image: "/projects/placeholder.jpg",
-    imageAlt: "newforms — in-progress, dashboard screenshot pending",
+    image: "/projects/newforms.svg",
+    imageAlt: "newforms dashboard mock — response stats, 14-day sparkline, response table",
     links: [{ label: "Read case study →", href: "/projects/newforms" }],
     caseStudy: {
       tagline: "Form-analytics SaaS for teams outgrowing Google Forms but not ready for Typeform pricing.",
@@ -158,8 +158,8 @@ export const projects: Project[] = [
       "One-click copy or download. No sign-up, no tracking.",
     ],
     stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind 4"],
-    image: "/projects/placeholder.jpg",
-    imageAlt: "CLAUDE.md Generator — open source tool",
+    image: "/projects/claude-md-tool.jpg",
+    imageAlt: "CLAUDE.md Generator UI — form + live markdown preview",
     links: [
       { label: "Open the tool →", href: "/tools/claude-md" },
       { label: "Read case study →", href: "/projects/claude-md-generator" },
