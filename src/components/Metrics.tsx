@@ -1,6 +1,6 @@
 const stats = [
   { value: "4", label: "months shipping with Claude Code" },
-  { value: "3", label: "products live, pre-launch, or open source" },
+  { value: "4", label: "products live, pre-launch, or open source" },
   { value: "~800", label: "LOC of Python ETL owned end-to-end" },
   { value: "40%", label: "of Claude's first-pass output cut on review" },
 ];

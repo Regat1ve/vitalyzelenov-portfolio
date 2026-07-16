@@ -8,7 +8,7 @@ export function Projects() {
         Projects
       </h2>
       <p className="text-2xl md:text-3xl font-semibold tracking-tight mb-10 max-w-xl">
-        Three things I built this year.
+        Four things I shipped this year.
       </p>
       <div className="space-y-8">
         {projects.map((p) => (
