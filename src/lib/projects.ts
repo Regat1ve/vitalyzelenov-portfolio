@@ -223,8 +223,8 @@ export const projects: Project[] = [
       "httpx",
       "pytest",
     ],
-    image: "/projects/placeholder.jpg",
-    imageAlt: "remote-work-radar /jobs page — filterable list of remote postings with entry-level and scam badges",
+    image: "/projects/remote-work-radar.jpg",
+    imageAlt: "remote-work-radar /jobs page — filterable list of 540 remote postings with entry-level and scam badges",
     links: [
       { label: "Read case study →", href: "/projects/remote-work-radar" },
       { label: "Repo →", href: "https://github.com/Regat1ve/remote-work-radar" },
