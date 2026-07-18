@@ -227,6 +227,7 @@ export const projects: Project[] = [
     imageAlt: "remote-work-radar /jobs page — filterable list of 540 remote postings with entry-level and scam badges",
     links: [
       { label: "Read case study →", href: "/projects/remote-work-radar" },
+      { label: "Live site →", href: "https://remote-work-radar-web-g6sb.vercel.app" },
       { label: "Repo →", href: "https://github.com/Regat1ve/remote-work-radar" },
     ],
     caseStudy: {
