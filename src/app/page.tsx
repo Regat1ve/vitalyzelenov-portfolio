@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main className="flex-1 w-full mx-auto max-w-3xl md:max-w-4xl lg:max-w-5xl px-4 sm:px-6">
+      <main className="flex-1 w-full mx-auto max-w-4xl px-6 sm:px-8 lg:px-10 py-6 sm:py-10 space-y-6">
         <Hero />
         <About />
         <Projects />

@@ -9,17 +9,17 @@ import { Metrics } from "./Metrics";
 export function Hero() {
   const t = useT();
   return (
-    <section id="top" className="relative pt-16 pb-16 md:pt-20 md:pb-20 overflow-hidden">
-      <div className="absolute inset-x-0 -top-6 h-[42vh] md:h-[52vh] -z-10 pointer-events-none">
+    <section id="top" className="relative rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10 md:p-14 overflow-hidden">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
         <Image
           src="/banner.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-40 dark:opacity-30"
+          className="object-cover opacity-30 dark:opacity-25"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[color:var(--color-background)]/60 to-[color:var(--color-background)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[color:var(--color-background)]/70 to-[color:var(--color-background)]/95" />
       </div>
 
       <div className="flex flex-col-reverse md:flex-row md:items-center md:gap-10">

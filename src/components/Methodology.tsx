@@ -7,7 +7,7 @@ const ruleKeys = ["r1", "r2", "r3", "r4", "r5"] as const;
 export function Methodology() {
   const t = useT();
   return (
-    <section id="methodology" className="py-16 border-t border-[color:var(--color-border)]">
+    <section id="methodology" className="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10 md:p-14">
       <h2 className="text-sm font-mono uppercase tracking-widest text-[color:var(--color-muted)] mb-2">
         {t("methodology.eyebrow")}
       </h2>

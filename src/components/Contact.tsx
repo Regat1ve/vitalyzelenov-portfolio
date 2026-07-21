@@ -13,7 +13,7 @@ const channels = [
 export function Contact() {
   const t = useT();
   return (
-    <section id="contact" className="py-16 border-t border-[color:var(--color-border)]">
+    <section id="contact" className="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-card)] p-6 sm:p-10 md:p-14">
       <h2 className="text-sm font-mono uppercase tracking-widest text-[color:var(--color-muted)] mb-2">
         {t("contact.eyebrow")}
       </h2>
