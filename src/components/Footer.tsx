@@ -8,7 +8,7 @@ export function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="border-t border-[color:var(--color-border)] py-8 mt-16 text-sm text-[color:var(--color-muted)]">
-      <div className="mx-auto max-w-5xl px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
         <p>{t("footer.copyright").replace("{year}", String(year))}</p>
         <a
           href={config.links.github}

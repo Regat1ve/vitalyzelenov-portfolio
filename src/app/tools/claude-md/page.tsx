@@ -14,7 +14,7 @@ export default function ClaudeMdToolPage() {
   return (
     <>
       <Nav />
-      <main className="flex-1 mx-auto w-full max-w-5xl px-6 py-12">
+      <main className="flex-1 mx-auto w-full max-w-6xl px-6 py-12">
         <div className="mb-10 max-w-2xl">
           <Link
             href="/"
