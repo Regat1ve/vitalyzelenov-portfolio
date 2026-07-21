@@ -9,7 +9,7 @@ export function Nav() {
   const t = useT();
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[color:var(--color-background)]/70 border-b border-[color:var(--color-border)]">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <nav className="flex w-full items-center justify-between px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 py-4">
         <Link href="/" className="font-mono text-sm font-semibold tracking-tight hover:text-[color:var(--color-accent)] transition-colors">
           vitaly.dev
         </Link>
