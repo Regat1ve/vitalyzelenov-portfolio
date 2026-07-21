@@ -2,7 +2,7 @@
 
 import { useT } from "@/lib/i18n";
 
-const qKeys = ["q1", "q2", "q3", "q4", "q5", "q6"] as const;
+const qKeys = ["q1", "q2", "q3", "q4"] as const;
 
 export function FAQ() {
   const t = useT();

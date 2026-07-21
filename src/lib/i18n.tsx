@@ -34,7 +34,7 @@ const dict = {
     "hero.tagline": "I ship real products with Claude Code.",
     "hero.pitch":
       "Full-stack developer, four months in. I code with AI as a co-worker, not a novelty. Two products in production or pre-launch, one open tool in the wild, and a discipline for cutting what does not need to ship.",
-    "hero.badge.availability": "Open for contract · $30–50/hr",
+    "hero.badge.availability": "Open to inquiries",
     "hero.badge.remote": "Remote · EU + US East hours",
     "hero.cta.projects": "See projects",
     "hero.cta.hire": "Hire me",
@@ -48,7 +48,7 @@ const dict = {
     // About
     "about.eyebrow": "About",
     "about.p1":
-      "I started coding seriously in March 2026. Instead of grinding tutorials for a year, I picked a real problem — my mom’s medical clinic needed a marketplace — and shipped it with Claude Code alongside me. Four months later MedKompas is onboarding partner clinics.",
+      "I started coding seriously in March 2026. Instead of grinding tutorials for a year, I picked a real problem — bootstrapping a medical-tourism marketplace inside Russia — and shipped MedKompas with Claude Code alongside me. Four months in, we are onboarding partner clinics.",
     "about.p2":
       "The uncomfortable truth is that AI writes a lot of good code and even more code you should never merge. My advantage is not typing speed. It is knowing what to keep, what to cut, and what Claude cannot decide for you: schema shape, auth boundaries, the trade-offs a co-founder actually cares about.",
     "about.p3.pre": "I am opening my calendar for contract and freelance work with founders who want someone to ",
@@ -91,18 +91,12 @@ const dict = {
     "faq.q2.q": "Do you just prompt-engineer while Claude does everything?",
     "faq.q2.a":
       "No. Claude ships boilerplate, first-draft components, and glue code fast. I own schema decisions, auth boundaries, and every merge review. On MedKompas I deleted ~40% of what Claude wrote on the first pass. Discipline is the leverage.",
-    "faq.q3.q": "What’s your rate?",
+    "faq.q3.q": "Timezone overlap?",
     "faq.q3.a":
-      "$30–50/hr depending on scope and length. Prefer 1-week paid trial → month-to-month contract. Fixed-price for well-scoped tickets. Currency: USDC via Bybit or wire transfer.",
-    "faq.q4.q": "You’re in Russia. How do payments work?",
-    "faq.q4.a":
-      "Bybit USDC works globally. Wise wire works for most EU/US clients. I do not touch Payoneer or PayPal. Invoices in USD, standard NET-30 or NET-7 for smaller engagements.",
-    "faq.q5.q": "Timezone overlap?",
-    "faq.q5.a":
       "UTC+3 (Nizhny Novgorod). Comfortable overlap window with EU business hours all day and US East Coast until 24:00 MSK. Not stretching to US Pacific — quality drops after midnight my time.",
-    "faq.q6.q": "What kind of work do you want?",
-    "faq.q6.a":
-      "Founders who need a full flow shipped end-to-end — auth, data model, main feature, deploy. Or a founding engineer role at a pre-seed / seed startup. Not interested in agencies subcontracting to me at half rate.",
+    "faq.q4.q": "What kind of work do you want?",
+    "faq.q4.a":
+      "Founders who need a full flow shipped end-to-end — auth, data model, main feature, deploy. Or a founding engineer role at a pre-seed / seed startup. Not interested in agencies subcontracting to me.",
 
     // Contact
     "contact.eyebrow": "Contact",
@@ -201,13 +195,13 @@ const dict = {
     "toggle.lang.aria": "Переключить язык",
 
     // Hero
-    "hero.location": "Нижний Новгород, Россия · UTC+3",
+    "hero.location": "Нижний Новгород · МСК (UTC+3)",
     "hero.greeting": "Привет, я Виталий.",
     "hero.tagline": "Делаю реальные продукты в паре с Claude Code.",
     "hero.pitch":
       "Full-stack разработчик, четыре месяца в деле. Работаю с AI как с коллегой, а не как с игрушкой. Два продукта в проде или на предзапуске, один открытый инструмент в открытом доступе, и привычка резать всё, что не должно доехать до релиза.",
-    "hero.badge.availability": "Открыт к контракту · $30–50/час",
-    "hero.badge.remote": "Удалённо · часы ЕС и восточное побережье США",
+    "hero.badge.availability": "Открыт к контактам",
+    "hero.badge.remote": "Удалённо · рабочие часы по МСК",
     "hero.cta.projects": "К проектам",
     "hero.cta.hire": "Нанять меня",
 
@@ -220,7 +214,7 @@ const dict = {
     // About
     "about.eyebrow": "Обо мне",
     "about.p1":
-      "Всерьёз начал кодить в марте 2026-го. Вместо года туториалов взял реальную задачу — маркетплейс для клиники моей мамы — и вытащил его вместе с Claude Code. Через четыре месяца MedKompas уже подключает партнёрские клиники.",
+      "Всерьёз начал кодить в марте 2026-го. Вместо года туториалов взял реальную задачу — начать двигать медицинский туризм внутри России — и вытащил MedKompas вместе с Claude Code. Четыре месяца спустя подключаем первые партнёрские клиники.",
     "about.p2":
       "Правда в том, что AI пишет много хорошего кода и ещё больше кода, который никогда не стоит мёржить. Моё преимущество — не скорость набора. Это понимание, что оставить, что вырезать, и что Claude за тебя не решит: форма схемы, границы авторизации, компромиссы, которые волнуют реального сооснователя.",
     "about.p3.pre":
@@ -264,24 +258,18 @@ const dict = {
     "faq.q2.q": "Ты просто промптишь, а Claude делает всё за тебя?",
     "faq.q2.a":
       "Нет. Claude быстро выдаёт бойлерплейт, первые драфты компонентов и склеивающий код. Решения по схеме, границы авторизации и ревью каждого мёржа — на мне. На MedKompas я удалил ~40% того, что Claude выдал первым заходом. Дисциплина — вот рычаг.",
-    "faq.q3.q": "Какая ставка?",
+    "faq.q3.q": "Как со временем?",
     "faq.q3.a":
-      "$30–50/час в зависимости от скоупа и длины проекта. Предпочитаю недельный платный триал → месячный контракт. Fixed-price для чётко скоупированных задач. Валюта: USDC через Bybit или SWIFT.",
-    "faq.q4.q": "Ты из России. Как с оплатой?",
+      "МСК (UTC+3). Основное окно — весь рабочий день по МСК. С европейскими и восточно-американскими командами работаю до 24:00 МСК. До Западного побережья США не тянусь — качество падает после полуночи.",
+    "faq.q4.q": "Какую работу ищешь?",
     "faq.q4.a":
-      "Bybit USDC работает по всему миру. Wise-перевод подходит большинству клиентов из ЕС и США. Payoneer и PayPal не трогаю. Инвойсы в USD, стандартный NET-30 или NET-7 для мелких контрактов.",
-    "faq.q5.q": "Как со временем?",
-    "faq.q5.a":
-      "UTC+3 (Нижний Новгород). Комфортное окно — весь рабочий день ЕС и восточное побережье США до 24:00 МСК. До Западного побережья не тянусь — качество падает после полуночи.",
-    "faq.q6.q": "Какую работу ищешь?",
-    "faq.q6.a":
-      "Основателей, которым нужен полный флоу под ключ — авторизация, модель данных, основная фича, деплой. Или роль founding engineer в pre-seed / seed-стартапе. Работать через агентство за половину ставки — не интересно.",
+      "Основателей, которым нужен полный флоу под ключ — авторизация, модель данных, основная фича, деплой. Или роль founding engineer в pre-seed / seed-стартапе. Работать через агентство ради галочки — не интересно.",
 
     // Contact
     "contact.eyebrow": "Контакты",
     "contact.headline": "Нужен человек, который реально доведёт до релиза?",
     "contact.body":
-      "Открыт к контракту и фрилансу. Часы ЕС и восточного побережья США — норм. Самые быстрые каналы — почта и LinkedIn.",
+      "Открыт к контракту и фрилансу. Работаю по МСК, с европейскими и восточно-американскими командами — комфортно. Самые быстрые каналы — почта и LinkedIn.",
 
     // Footer
     "footer.copyright":
