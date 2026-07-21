@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main className="flex-1 w-full mx-auto max-w-[1280px] px-6 lg:px-10">
+      <main className="flex-1 w-full mx-auto max-w-3xl md:max-w-4xl lg:max-w-5xl px-4 sm:px-6">
         <Hero />
         <About />
         <Projects />
