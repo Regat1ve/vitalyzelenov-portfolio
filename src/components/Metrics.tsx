@@ -1,11 +1,15 @@
-const stats = [
-  { value: "4", label: "months shipping with Claude Code" },
-  { value: "4", label: "products live, pre-launch, or open source" },
-  { value: "~800", label: "LOC of Python ETL owned end-to-end" },
-  { value: "40%", label: "of Claude's first-pass output cut on review" },
-];
+"use client";
+
+import { useT } from "@/lib/i18n";
 
 export function Metrics() {
+  const t = useT();
+  const stats = [
+    { value: "4", label: t("metrics.months") },
+    { value: "4", label: t("metrics.products") },
+    { value: "~800", label: t("metrics.loc") },
+    { value: "40%", label: t("metrics.cut") },
+  ];
   return (
     <dl className="grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-[color:var(--color-border)] pt-8 mt-10">
       {stats.map((s) => (

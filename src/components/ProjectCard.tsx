@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import type { Project } from "@/lib/projects";
+import { useT } from "@/lib/i18n";
 
 const statusColor: Record<Project["status"], string> = {
   live: "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20",
@@ -8,20 +11,25 @@ const statusColor: Record<Project["status"], string> = {
   "open-source": "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20",
 };
 
-const statusLabel: Record<Project["status"], string> = {
-  live: "Live",
-  "pre-launch": "Pre-launch",
-  "in-progress": "In progress",
-  "open-source": "Open source",
+// Map original English link labels → i18n keys. Fallback: keep original label.
+const linkKey: Record<string, string> = {
+  "Read case study →": "project.link.caseStudy",
+  "medkompas13.ru →": "project.link.medkompasSite",
+  "Open the tool →": "project.link.openTool",
+  "Playbook repo →": "project.link.playbookRepo",
+  "Live site →": "project.link.liveSite",
+  "Repo →": "project.link.repo",
 };
 
 export function ProjectCard({ project }: { project: Project }) {
+  const t = useT();
+  const base = `project.${project.slug}`;
   return (
     <article className="rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-card)] overflow-hidden hover:border-[color:var(--color-accent)]/50 transition-colors">
       <div className="relative w-full aspect-[16/9] bg-[color:var(--color-code)]">
         <Image
           src={project.image}
-          alt={project.imageAlt}
+          alt={t(`${base}.imageAlt`)}
           fill
           sizes="(max-width: 768px) 100vw, 800px"
           className="object-cover"
@@ -33,21 +41,21 @@ export function ProjectCard({ project }: { project: Project }) {
           <span
             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${statusColor[project.status]}`}
           >
-            {statusLabel[project.status]}
+            {t(`projects.status.${project.status}`)}
           </span>
         </div>
         <p className="text-sm text-[color:var(--color-muted)] mb-1">
-          {project.role}
+          {t(`${base}.role`)}
         </p>
         <p className="text-xs font-mono text-[color:var(--color-muted)] mb-4">
-          {project.timeline}
+          {t(`${base}.timeline`)}
         </p>
-        <p className="text-base leading-relaxed mb-4">{project.summary}</p>
+        <p className="text-base leading-relaxed mb-4">{t(`${base}.summary`)}</p>
         <ul className="space-y-1.5 mb-5 text-sm text-[color:var(--color-muted)]">
-          {project.bullets.map((b) => (
+          {project.bullets.map((b, i) => (
             <li key={b} className="flex gap-2">
               <span className="text-[color:var(--color-accent)] flex-shrink-0">→</span>
-              <span>{b}</span>
+              <span>{t(`${base}.b${i + 1}`)}</span>
             </li>
           ))}
         </ul>
@@ -69,7 +77,7 @@ export function ProjectCard({ project }: { project: Project }) {
                 href={l.href}
                 className="text-[color:var(--color-accent)] hover:underline font-medium"
               >
-                {l.label}
+                {linkKey[l.label] ? t(linkKey[l.label]) : l.label}
               </a>
             ))}
           </div>
