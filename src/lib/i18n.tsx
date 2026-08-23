@@ -18,6 +18,7 @@ const dict = {
   en: {
     // Nav
     "nav.projects": "Projects",
+    "nav.services": "Services",
     "nav.methodology": "Methodology",
     "nav.faq": "FAQ",
     "nav.tools": "Tools",
@@ -48,7 +49,7 @@ const dict = {
     // About
     "about.eyebrow": "About",
     "about.p1":
-      "I started coding seriously in March 2026. Instead of grinding tutorials for a year, I picked a real problem — bootstrapping a medical-tourism marketplace inside Russia — and shipped MedKompas with Claude Code alongside me. Four months in, we are onboarding partner clinics.",
+      "I started coding seriously in March 2026. Instead of grinding tutorials for a year, I picked a real problem — bootstrapping a medical-tourism marketplace inside Russia — and shipped MedKompas with Claude Code alongside me. Five months in, the marketplace is live and taking patient enquiries while we line up the first clinics.",
     "about.p2":
       "The uncomfortable truth is that AI writes a lot of good code and even more code you should never merge. My advantage is not typing speed. It is knowing what to keep, what to cut, and what Claude cannot decide for you: schema shape, auth boundaries, the trade-offs a co-founder actually cares about.",
     "about.p3.pre": "I am opening my calendar for contract and freelance work with founders who want someone to ",
@@ -81,6 +82,29 @@ const dict = {
     "methodology.r5.title": "Use AI to compress the boring 80%. Sit in the important 20%.",
     "methodology.r5.body":
       "Boilerplate, glue code, first-draft components — Claude ships. Model design, auth boundaries, taste-checks on every merge — I ship.",
+
+    // Services
+    "services.eyebrow": "Hire me for",
+    "services.headline": "Four things I can start on this week.",
+    "services.s1.meta": "2–4 weeks",
+    "services.s1.title": "MVP from empty repo to live URL",
+    "services.s1.body":
+      "Next.js or React + Postgres, auth written by hand, the one flow that actually matters, deployed on a real domain. This is exactly what MedKompas and newforms are.",
+    "services.s2.meta": "3–10 days",
+    "services.s2.title": "Data pipelines and integrations",
+    "services.s2.body":
+      "Pull from APIs and feeds you do not control, deduplicate, normalize, land it in Postgres on a schedule. Python + Prisma. remote-work-radar ingests three job boards this way.",
+    "services.s3.meta": "1–2 weeks",
+    "services.s3.title": "An AI feature inside your existing product",
+    "services.s3.body":
+      "Claude API for classification, extraction, drafting, or chat over your own data. I work with these models every working day, so I know where they break and what they cost.",
+    "services.s4.meta": "2–5 days",
+    "services.s4.title": "Audit of AI-generated code",
+    "services.s4.body":
+      "You shipped fast with Cursor or Copilot and now nobody can read it. I cut what should not be there and write the CLAUDE.md that stops it growing back.",
+    "services.note":
+      "Fixed scope and fixed timeline, agreed before anything starts. If the job turns out bigger than the estimate, you hear it on day two, not on the deadline.",
+    "services.cta": "Describe your task",
 
     // FAQ
     "faq.eyebrow": "FAQ",
@@ -121,7 +145,7 @@ const dict = {
     "project.medkompas.role": "Co-founder, full-stack",
     "project.medkompas.timeline": "4 months, part-time (Mar–Jul 2026)",
     "project.medkompas.summary":
-      "Healthtech marketplace for medical tourism inside Russia. Map + filters + booking flow, connecting clinics with domestic and inbound patients. Onboarding first partner clinics right now.",
+      "Healthtech marketplace for medical tourism inside Russia. Map + filters + booking flow, connecting clinics with domestic and inbound patients. Deployed and taking patient enquiries, pre-launch on the clinic side.",
     "project.medkompas.imageAlt":
       "MedKompas homepage — search bar, region stats, 17 doctors listed",
     "project.medkompas.b1":
@@ -184,6 +208,7 @@ const dict = {
   ru: {
     // Nav
     "nav.projects": "Проекты",
+    "nav.services": "Услуги",
     "nav.methodology": "Методология",
     "nav.faq": "FAQ",
     "nav.tools": "Инструменты",
@@ -214,7 +239,7 @@ const dict = {
     // About
     "about.eyebrow": "Обо мне",
     "about.p1":
-      "Всерьёз начал кодить в марте 2026-го. Вместо года туториалов взял реальную задачу — начать двигать медицинский туризм внутри России — и вытащил MedKompas вместе с Claude Code. Четыре месяца спустя подключаем первые партнёрские клиники.",
+      "Всерьёз начал кодить в марте 2026-го. Вместо года туториалов взял реальную задачу — начать двигать медицинский туризм внутри России — и вытащил MedKompas вместе с Claude Code. Пять месяцев спустя маркетплейс работает и собирает заявки от пациентов, клиники — следующий шаг.",
     "about.p2":
       "Правда в том, что AI пишет много хорошего кода и ещё больше кода, который никогда не стоит мёржить. Моё преимущество — не скорость набора. Это понимание, что оставить, что вырезать, и что Claude за тебя не решит: форма схемы, границы авторизации, компромиссы, которые волнуют реального сооснователя.",
     "about.p3.pre":
@@ -248,6 +273,29 @@ const dict = {
     "methodology.r5.title": "AI сжимает скучные 80%. Ты сидишь в важных 20%.",
     "methodology.r5.body":
       "Бойлерплейт, склеивающий код, первые драфты компонентов — шипит Claude. Модель данных, границы авторизации, вкусовые решения на каждом мёрже — шиплю я.",
+
+    // Services
+    "services.eyebrow": "Зачем меня нанимают",
+    "services.headline": "Четыре задачи, за которые могу взяться на этой неделе.",
+    "services.s1.meta": "2–4 недели",
+    "services.s1.title": "MVP от пустого репозитория до живого адреса",
+    "services.s1.body":
+      "Next.js или React + Postgres, авторизация руками, один флоу, ради которого всё затевалось, и деплой на реальном домене. Ровно так сделаны MedKompas и newforms.",
+    "services.s2.meta": "3–10 дней",
+    "services.s2.title": "Данные и интеграции",
+    "services.s2.body":
+      "Забрать из чужих API и фидов, убрать дубли, привести к одному виду и по расписанию класть в Postgres. Python + Prisma. Так работает remote-work-radar на трёх источниках вакансий.",
+    "services.s3.meta": "1–2 недели",
+    "services.s3.title": "AI-фича внутри существующего продукта",
+    "services.s3.body":
+      "Claude API под классификацию, извлечение данных, генерацию текстов или чат по вашим данным. С этими моделями работаю каждый день и знаю, где они ломаются и сколько стоят.",
+    "services.s4.meta": "2–5 дня",
+    "services.s4.title": "Аудит кода, написанного нейросетью",
+    "services.s4.body":
+      "Быстро собрали на Cursor или Copilot, а теперь это невозможно читать. Вырезаю лишнее и пишу CLAUDE.md, чтобы оно не выросло снова.",
+    "services.note":
+      "Фиксированный объём и срок, согласованные до старта. Если задача оказывается больше оценки, вы узнаёте об этом на второй день, а не в дедлайн.",
+    "services.cta": "Описать задачу",
 
     // FAQ
     "faq.eyebrow": "FAQ",
@@ -286,9 +334,9 @@ const dict = {
 
     // Project card content (per project)
     "project.medkompas.role": "Сооснователь, full-stack",
-    "project.medkompas.timeline": "4 месяца, part-time (март–июль 2026)",
+    "project.medkompas.timeline": "5 месяцев, part-time (март–август 2026)",
     "project.medkompas.summary":
-      "Healthtech-маркетплейс для медицинского туризма внутри России. Карта + фильтры + бронирование, связывает клиники с российскими и въездными пациентами. Прямо сейчас подключаем первые партнёрские клиники.",
+      "Healthtech-маркетплейс для медицинского туризма внутри России. Карта + фильтры + бронирование, связывает клиники с российскими и въездными пациентами. Развёрнут и собирает заявки от пациентов, по клиникам — стадия pre-launch.",
     "project.medkompas.imageAlt":
       "Главная MedKompas — поиск, статистика по регионам, список из 17 врачей",
     "project.medkompas.b1":
