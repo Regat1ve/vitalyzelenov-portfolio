@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0b0a09">
+<title>КУЗНЕЦ</title>
+<meta name="description" content="Кузнечный merge: роняй заготовки, сплавляй одинаковые от меди до мифрила. Полный жар — удар молотом, который сваривает слиток с ближайшим таким же.">
+<link rel="icon" href="assets/tier_05_gold.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+  <div id="cabinet">
+
+    <header id="hud">
+      <div class="hud-block">
+        <span class="hud-label" data-i18n="score">Счёт</span>
+        <span class="hud-value" id="score">0</span>
+      </div>
+      <div class="hud-block hud-heat">
+        <span class="hud-label" data-i18n="heat">Жар</span>
+        <div id="heat-track"><div id="heat-fill"></div></div>
+      </div>
+      <div class="hud-block hud-right">
+        <span class="hud-label" data-i18n="best">Рекорд</span>
+        <span class="hud-value" id="best">0</span>
+      </div>
+    </header>
+
+    <div id="stage">
+      <canvas id="c"></canvas>
+
+      <div id="next-badge">
+        <span class="hud-label" data-i18n="next">Далее</span>
+        <img id="next-img" alt="">
+      </div>
+
+      <div id="hint" class="hidden"></div>
+
+      <div id="veil" class="screen">
+        <h1 class="logo">КУЗНЕЦ</h1>
+        <p class="tagline" data-i18n="tagline">Роняй заготовки. Одинаковые сплавляются.</p>
+        <ol class="rules">
+          <li data-i18n="rule1">Веди курсор и жми, чтобы бросить.</li>
+          <li data-i18n="rule2">Два одинаковых слитка сплавляются в следующий металл.</li>
+          <li data-i18n="rule3">Жар копится от сплавов. Полный жар — удар молотом.</li>
+        </ol>
+        <button class="big" id="play" type="button" data-i18n="play" disabled>Ковать</button>
+      </div>
+
+      <div id="over" class="screen hidden">
+        <p class="over-kicker" data-i18n="overKicker">Горн погас</p>
+        <p class="over-score" id="over-score">0</p>
+        <p class="over-line" id="over-line"></p>
+        <button class="big" id="again" type="button" data-i18n="again">Ещё раз</button>
+      </div>
+    </div>
+
+    <footer id="bar">
+      <button id="sound" type="button" aria-label="Звук">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4Z"/></svg>
+      </button>
+      <div id="ladder"></div>
+      <button id="hammer" type="button" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M13.2 2.4 9.6 6l1.5 1.5-1.4 1.4-1-1L2.6 15A2 2 0 0 0 5.4 17.8l7.1-6.1-1-1 1.4-1.4L14.4 11 18 7.4a3.4 3.4 0 0 0-4.8-5Z"/>
+        </svg>
+        <span data-i18n="reforge">Перековка</span>
+      </button>
+    </footer>
+
+  </div>
+
+</div>
+
+<script src="vendor/matter.min.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
