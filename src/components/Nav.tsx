@@ -17,6 +17,9 @@ export function Nav() {
           <Link href="/#projects" className="hover:text-[color:var(--color-foreground)] transition-colors">
             {t("nav.projects")}
           </Link>
+          <Link href="/demos" className="hover:text-[color:var(--color-foreground)] transition-colors">
+            {t("nav.demos")}
+          </Link>
           <Link href="/#services" className="hover:text-[color:var(--color-foreground)] transition-colors">
             {t("nav.services")}
           </Link>

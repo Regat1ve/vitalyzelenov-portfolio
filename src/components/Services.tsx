@@ -37,8 +37,19 @@ export function Services() {
         {t("services.note")}
       </p>
       <Link
+        href="/demos"
+        className="mt-8 flex items-center justify-between gap-4 rounded-xl border border-[color:var(--color-border)] p-5 transition-colors hover:border-[color:var(--color-accent)]"
+      >
+        <span>
+          <span className="block font-medium">{t("services.demos.title")}</span>
+          <span className="block text-sm text-[color:var(--color-muted)]">{t("services.demos.body")}</span>
+        </span>
+        <span className="shrink-0 text-[color:var(--color-accent)]">→</span>
+      </Link>
+
+      <Link
         href="#contact"
-        className="mt-6 inline-flex items-center h-11 px-5 rounded-md bg-[color:var(--color-foreground)] text-[color:var(--color-background)] font-medium text-sm hover:opacity-90 transition-opacity"
+        className="mt-4 inline-flex items-center h-11 px-5 rounded-md bg-[color:var(--color-foreground)] text-[color:var(--color-background)] font-medium text-sm hover:opacity-90 transition-opacity"
       >
         {t("services.cta")}
       </Link>

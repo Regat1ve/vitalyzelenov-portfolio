@@ -19,6 +19,7 @@ const dict = {
     // Nav
     "nav.projects": "Projects",
     "nav.services": "Services",
+    "nav.demos": "Demos",
     "nav.methodology": "Methodology",
     "nav.faq": "FAQ",
     "nav.tools": "Tools",
@@ -105,6 +106,8 @@ const dict = {
     "services.note":
       "Fixed scope and fixed timeline, agreed before anything starts. If the job turns out bigger than the estimate, you hear it on day two, not on the deadline.",
     "services.cta": "Describe your task",
+    "services.demos.title": "Four live demos you can click through",
+    "services.demos.body": "3D product page, analytics dashboard, store with a cart, booking flow — all working code, not mockups.",
 
     // FAQ
     "faq.eyebrow": "FAQ",
@@ -209,6 +212,7 @@ const dict = {
     // Nav
     "nav.projects": "Проекты",
     "nav.services": "Услуги",
+    "nav.demos": "Демо",
     "nav.methodology": "Методология",
     "nav.faq": "FAQ",
     "nav.tools": "Инструменты",
@@ -296,6 +300,8 @@ const dict = {
     "services.note":
       "Фиксированный объём и срок, согласованные до старта. Если задача оказывается больше оценки, вы узнаёте об этом на второй день, а не в дедлайн.",
     "services.cta": "Описать задачу",
+    "services.demos.title": "Четыре демо, которые можно потрогать",
+    "services.demos.body": "3D-витрина, аналитический дашборд, магазин с корзиной и онлайн-запись — всё рабочий код, не макеты.",
 
     // FAQ
     "faq.eyebrow": "FAQ",
