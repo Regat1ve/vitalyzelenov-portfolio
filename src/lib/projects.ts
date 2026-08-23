@@ -318,4 +318,64 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
+    slug: "kuznets",
+    title: "КУЗНЕЦ",
+    status: "live",
+    role: "Solo — design, code, art",
+    timeline: "Built in one day, August 2026",
+    summary:
+      "A physics merge game set in a forge. Drop billets, fuse matching ones up an eight-step ladder from copper to mithril. The genre twist is Reforge: a heat meter that buys one hammer strike, welding any ingot to its nearest twin anywhere on the field.",
+    bullets: [
+      "Vanilla JS + matter.js, no build step. The same folder runs on Vercel and inside a Yandex.Games archive — nothing to compile, nothing to configure per host.",
+      "Reforge fixes the genre's worst moment: a lone ingot buried under the pile with its pair unreachable. Heat builds from every fusion; a full meter spends on one targeted weld.",
+      "Fixed 60 Hz timestep with a substep accumulator, so a 144 Hz laptop and a throttled phone run identical physics instead of drifting apart.",
+      "The basin height adapts to the viewport shape — a tall phone gets a deeper forge — and the floor body moves with it rather than the field being letterboxed.",
+      "Sprites are generated, not drawn by hand: a billet with an inlaid ingot, flat three-tone shading, supersampled 4x. A build-time assert fails if a sprite stops filling its collision circle, which is what caused visible gaps between resting bodies in the first pass.",
+      "Tier palette run through a colour-vision-deficiency validator before anything was rendered: worst adjacent pair ΔE 17.4 under deuteranopia. Warm and cool alternate up the ladder so neighbours never blur together.",
+      "Sound is synthesised in WebAudio — a noise transient through a bandpass plus two detuned triangles, pitched by tier. No audio files ship at all, and it mutes on tab blur and during ads, as the platform requires.",
+      "Yandex Games SDK is optional at runtime: leaderboard, interstitials and language detection when the platform is there, a plain game when it is not.",
+    ],
+    stack: ["Vanilla JS", "matter.js", "Canvas 2D", "WebAudio", "Python (Pillow)", "Yandex Games SDK"],
+    image: "/shots/kuznets.jpg",
+    imageAlt: "KUZNETS — coloured metal ingots piled at the bottom of a dark forge, score and heat meter above",
+    links: [
+      { label: "Play it →", href: "/games/kuznets" },
+      { label: "Read case study →", href: "/projects/kuznets" },
+    ],
+    caseStudy: {
+      tagline: "A merge game built in a day, from Blender render to a deployed URL, with one mechanic the genre does not have.",
+      problem:
+        "Merge games are the busiest shelf on Yandex.Games — Дино Дроп, Зомби: Слияние Оружия, Merge Mercs all sit in the top rows. That makes the format a good test: the rules are known, so the only thing left to judge is execution. It also has a well-known flaw. Sooner or later one ingot ends up buried with its only twin on the far side of the pile, and there is nothing you can do but wait to lose. I wanted to ship the genre properly and fix that specific moment.",
+      approach: [
+        "Checked the catalogue first instead of guessing. Merge titles were all over the front page, which settled the format before a line was written.",
+        "Chose vanilla JS over a framework on purpose. The deliverable had to be a folder that a static host and a platform ZIP both accept, so a build step would have been pure cost.",
+        "Designed Reforge as the answer to the buried-ingot problem: heat accrues from fusions, a full meter arms the hammer, and one click welds the chosen ingot to its nearest twin. A miss costs nothing — the hammer stays raised — because spending a full meter on a mis-tap would be worse than the problem it solves.",
+        "Tuned the field by playing it, not by reasoning about it. The first basin held roughly ninety of the smallest ingots and the top half never filled, so the ladder was rescaled and the depth capped.",
+        "Ran the physics loop on a fixed timestep after matter.js warned about variable deltas. Frame-rate-dependent physics is the kind of bug that only shows up on someone else's phone.",
+      ],
+      aiSplit: {
+        claude: [
+          "First pass of the matter.js wiring — bodies, walls, collision events.",
+          "The WebAudio synth voices for the metal clang.",
+          "Boilerplate for the Yandex SDK wrapper and the RU/EN string tables.",
+        ],
+        me: [
+          "The Reforge mechanic — what it costs, what happens on a miss, and why a failed strike must not spend the meter.",
+          "Killing eight separate Blender renders. Mirror-finish metal reflects an almost-black world, so silver and platinum came out black; one neutral render tinted per tier was both better looking and controllable.",
+          "Catching that the sprites had a transparent margin and a 14% squash, which is what put visible gaps between resting bodies — a rendering bug that reads as a physics bug.",
+          "Deciding the chain multiplier was worth the volatility. A seven-link cascade paying +168 is the moment people replay for.",
+        ],
+      },
+      outcome:
+        "Live and playable in the browser and on a phone. A full run lands around three to four minutes, all eight tiers are reachable, and the whole thing weighs under half a megabyte including the physics engine.",
+      lessons: [
+        "Check the shop before designing. Ten minutes in the catalogue replaced a whole argument about what format to build.",
+        "A gap between two circles that are touching is not a physics bug. Measure the sprite before you touch the solver — the transparent margin was 12.5% and the collision radius was right all along.",
+        "Never render a mirror metal against a dark world. Metallic 1.0 has no diffuse component, so the object shows you the room, and the room was black.",
+        "Fixed timestep is not premature. Variable delta physics works perfectly on the machine you wrote it on and nowhere else.",
+        "Give a spent resource a refund path. The hammer staying raised after a miss is three lines of code and it is the difference between a mechanic people use and one they are afraid of.",
+      ],
+    },
+  },
 ];

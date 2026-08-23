@@ -59,7 +59,7 @@ const dict = {
 
     // Projects section
     "projects.eyebrow": "Projects",
-    "projects.headline": "Five things I shipped this year.",
+    "projects.headline": "Six things I shipped this year.",
     "projects.status.live": "Live",
     "projects.status.pre-launch": "Pre-launch",
     "projects.status.in-progress": "In progress",
@@ -147,6 +147,29 @@ const dict = {
       "ATELIER — booking in four steps. Calendar with busy slots blocked, phone mask and validation, confirmation screen with the order summary.",
     "project.demo-lab.b5":
       "All four are statically prerendered. The 3D bundle is a dynamic import, so it never touches the first load of the other pages.",
+    "project.kuznets.role": "Solo — design, code, art",
+    "project.kuznets.timeline": "Built in one day, August 2026",
+    "project.kuznets.summary":
+      "A physics merge game set in a forge. Drop billets, fuse matching ones up an eight-step ladder from copper to mithril. The genre twist is Reforge: a heat meter that buys one hammer strike, welding any ingot to its nearest twin anywhere on the field.",
+    "project.kuznets.imageAlt":
+      "KUZNETS — coloured metal ingots piled at the bottom of a dark forge, score and heat meter above",
+    "project.kuznets.b1":
+      "Vanilla JS + matter.js, no build step. The same folder runs on Vercel and inside a Yandex.Games archive — nothing to compile, nothing to configure per host.",
+    "project.kuznets.b2":
+      "Reforge fixes the genre's worst moment: a lone ingot buried under the pile with its pair unreachable. Heat builds from every fusion; a full meter spends on one targeted weld.",
+    "project.kuznets.b3":
+      "Fixed 60 Hz timestep with a substep accumulator, so a 144 Hz laptop and a throttled phone run identical physics instead of drifting apart.",
+    "project.kuznets.b4":
+      "The basin height adapts to the viewport shape — a tall phone gets a deeper forge — and the floor body moves with it rather than the field being letterboxed.",
+    "project.kuznets.b5":
+      "Sprites are generated, not drawn by hand, and a build-time assert fails if one stops filling its collision circle — that margin is what put visible gaps between resting bodies in the first pass.",
+    "project.kuznets.b6":
+      "Tier palette run through a colour-vision-deficiency validator before anything was rendered: worst adjacent pair ΔE 17.4 under deuteranopia. Warm and cool alternate up the ladder so neighbours never blur together.",
+    "project.kuznets.b7":
+      "Sound is synthesised in WebAudio — a noise transient through a bandpass plus two detuned triangles, pitched by tier. No audio files ship at all, and it mutes on tab blur and during ads, as the platform requires.",
+    "project.kuznets.b8":
+      "Yandex Games SDK is optional at runtime: leaderboard, interstitials and language detection when the platform is there, a plain game when it is not.",
+    "project.link.playIt": "Play it →",
     "project.link.openDemos": "Open the demos →",
 
     // Footer
@@ -271,7 +294,7 @@ const dict = {
 
     // Projects section
     "projects.eyebrow": "Проекты",
-    "projects.headline": "Пять штук, которые я выпустил в этом году.",
+    "projects.headline": "Шесть штук, которые я выпустил в этом году.",
     "projects.status.live": "В проде",
     "projects.status.pre-launch": "Предзапуск",
     "projects.status.in-progress": "В работе",
@@ -359,6 +382,29 @@ const dict = {
       "ATELIER — запись в четыре шага. Календарь с заблокированными занятыми слотами, маска и валидация телефона, экран подтверждения со сводкой заказа.",
     "project.demo-lab.b5":
       "Все четыре предрендерятся статически. 3D-бандл вынесен в динамический импорт и не попадает в первую загрузку остальных страниц.",
+    "project.kuznets.role": "Один — геймдизайн, код, графика",
+    "project.kuznets.timeline": "Собрано за один день, август 2026",
+    "project.kuznets.summary":
+      "Merge-игра на физике в кузнице. Роняешь заготовки, одинаковые сплавляются по лестнице из восьми металлов от меди до мифрила. Своё поверх жанра — перековка: шкала жара покупает удар молотом, который сваривает выбранный слиток с ближайшим таким же где угодно на поле.",
+    "project.kuznets.imageAlt":
+      "КУЗНЕЦ — цветные слитки в нижней части тёмного горна, сверху счёт и шкала жара",
+    "project.kuznets.b1":
+      "Чистый JS и matter.js, без сборки. Одна и та же папка едет и на Vercel, и в архив Яндекс.Игр — нечего компилировать и нечего донастраивать под площадку.",
+    "project.kuznets.b2":
+      "Перековка чинит худший момент жанра: одинокий слиток завален грудой, а его пара недостижима. Жар копится с каждого сплава, полная шкала тратится на один точечный шов.",
+    "project.kuznets.b3":
+      "Физика идёт фиксированным тиком 60 Гц с накопителем подшагов: ноутбук на 144 Гц и придушенный телефон считают одно и то же, а не расходятся.",
+    "project.kuznets.b4":
+      "Высота горна подстраивается под форму экрана — на вытянутом телефоне бассейн глубже, — и пол двигается вместе с ней, вместо того чтобы обрамлять поле пустыми полями.",
+    "project.kuznets.b5":
+      "Спрайты генерируются, а не рисуются руками, и сборка падает по assert, если спрайт перестал заполнять свой физический круг — именно эти поля давали видимые дыры между лежащими телами в первой версии.",
+    "project.kuznets.b6":
+      "Палитра тиров прогнана через валидатор на дальтонизм до того, как был отрисован первый спрайт: худшая соседняя пара ΔE 17.4 при дейтеранопии. Тёплые и холодные чередуются по лестнице, поэтому соседи никогда не сливаются.",
+    "project.kuznets.b7":
+      "Звук синтезируется в WebAudio: шумовой транзиент через полосовой фильтр и два расстроенных треугольника, высота зависит от тира. В игре нет ни одного аудиофайла, и она глохнет при уходе со вкладки и на рекламе — этого требует площадка.",
+    "project.kuznets.b8":
+      "SDK Яндекс.Игр подключается по желанию: на площадке есть таблица рекордов, реклама и определение языка, вне её — просто игра.",
+    "project.link.playIt": "Играть →",
     "project.link.openDemos": "Открыть демо →",
 
     // Footer
