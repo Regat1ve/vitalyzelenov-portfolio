@@ -252,7 +252,8 @@
       YS.sdk = await YaGames.init();
       const lang = YS.sdk.environment?.i18n?.lang;
       if (lang && STR[lang]) L = STR[lang];
-      try { await YS.sdk.getLeaderboards(); YS.lb = true; } catch { /* таблица ещё не заведена */ }
+      // getLeaderboards() устарел и бросает — метод проверяем через isAvailableMethod
+      try { YS.lb = await YS.sdk.isAvailableMethod("leaderboards.setScore"); } catch { YS.lb = false; }
     } catch { /* играем без платформы */ }
   }
 
@@ -262,9 +263,8 @@
 
   function sdkScore(v) {
     if (!YS.lb) return;
-    YS.sdk.getLeaderboards()
-      .then((lb) => lb.setLeaderboardScore("kuznets", v))
-      .catch(() => {});
+    // требует авторизованного игрока и не чаще раза в секунду — отказ тут не беда
+    Promise.resolve(YS.sdk.leaderboards.setScore("kuznets", v)).catch(() => {});
   }
 
   /** Межстраничная реклама через игру — не в каждом заходе, чтобы не бесить. */
