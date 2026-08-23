@@ -232,7 +232,10 @@
 
   /** SDK живёт только на площадке: вне её тег ничего не грузит и не сорит в консоль. */
   function loadSdkScript() {
-    const onPlatform = /(^|\.)yandex\.(ru|net|com)$/i.test(location.hostname) || window.self !== window.top;
+    const YA = /(^|\.)yandex\.(ru|net|com)$/i;
+    // на площадке игра лежит на *.yandex.net; при внешнем хостинге — во фрейме Яндекса
+    const parent = (location.ancestorOrigins && location.ancestorOrigins[0]) || document.referrer || "";
+    const onPlatform = YA.test(location.hostname) || /yandex\.(ru|net|com)/i.test(parent);
     if (!onPlatform || typeof YaGames !== "undefined") return Promise.resolve();
     return new Promise((res) => {
       const el = document.createElement("script");
