@@ -59,7 +59,7 @@ const dict = {
 
     // Projects section
     "projects.eyebrow": "Projects",
-    "projects.headline": "Four things I shipped this year.",
+    "projects.headline": "Five things I shipped this year.",
     "projects.status.live": "Live",
     "projects.status.pre-launch": "Pre-launch",
     "projects.status.in-progress": "In progress",
@@ -130,6 +130,24 @@ const dict = {
     "contact.headline": "Want someone to actually ship it?",
     "contact.body":
       "Available for contract & freelance. Comfortable with EU and US East Coast hours. Best routes below — email or LinkedIn get the fastest answer.",
+
+    "project.demo-lab.role": "Author",
+    "project.demo-lab.timeline": "Built in one day, August 2026",
+    "project.demo-lab.summary":
+      "Four working interfaces built to be clicked, not looked at: a scroll-driven 3D product page, an analytics dashboard, a store with a persistent cart, and a four-step booking flow.",
+    "project.demo-lab.imageAlt":
+      "AURORA demo — a reflective distorted sphere inside a wireframe cage on a dark field",
+    "project.demo-lab.b1":
+      "AURORA — React Three Fiber scene: shader-displaced geometry, particle shell, procedural environment from lightformers. No external models, no HDR files. Scroll drives camera, distortion and palette.",
+    "project.demo-lab.b2":
+      "PULSE — analytics dashboard. Charts hand-written in SVG, no charting library. Crosshair tooltip, sortable table, filters. Palette validated for colour-vision deficiency before shipping.",
+    "project.demo-lab.b3":
+      "KŌRI — storefront. Category, price and stock filters, three sort modes, cart that survives a reload, promo codes and a free-shipping threshold.",
+    "project.demo-lab.b4":
+      "ATELIER — booking in four steps. Calendar with busy slots blocked, phone mask and validation, confirmation screen with the order summary.",
+    "project.demo-lab.b5":
+      "All four are statically prerendered. The 3D bundle is a dynamic import, so it never touches the first load of the other pages.",
+    "project.link.openDemos": "Open the demos →",
 
     // Footer
     "footer.copyright":
@@ -253,7 +271,7 @@ const dict = {
 
     // Projects section
     "projects.eyebrow": "Проекты",
-    "projects.headline": "Четыре штуки, которые я выпустил в этом году.",
+    "projects.headline": "Пять штук, которые я выпустил в этом году.",
     "projects.status.live": "В проде",
     "projects.status.pre-launch": "Предзапуск",
     "projects.status.in-progress": "В работе",
@@ -324,6 +342,24 @@ const dict = {
     "contact.headline": "Нужен человек, который реально доведёт до релиза?",
     "contact.body":
       "Открыт к контракту и фрилансу. Работаю по МСК, с европейскими и восточно-американскими командами — комфортно. Самые быстрые каналы — почта и LinkedIn.",
+
+    "project.demo-lab.role": "Автор",
+    "project.demo-lab.timeline": "Собрано за один день, август 2026",
+    "project.demo-lab.summary":
+      "Четыре рабочих интерфейса, которые можно потрогать, а не рассматривать: 3D-витрина со скролл-анимацией, аналитический дашборд, магазин с живучей корзиной и запись в четыре шага.",
+    "project.demo-lab.imageAlt":
+      "Демо AURORA — отражающая сфера внутри каркасной оболочки на тёмном фоне",
+    "project.demo-lab.b1":
+      "AURORA — сцена на React Three Fiber: шейдерная деформация геометрии, поле частиц, процедурное окружение из lightformer-ов. Ни одной внешней модели и ни одного HDR-файла. Скролл двигает камеру, деформацию и палитру.",
+    "project.demo-lab.b2":
+      "PULSE — аналитический дашборд. Графики написаны руками в SVG, без библиотек. Кроссхейр с подсказкой, сортируемая таблица, фильтры. Палитра проверена на дальтонизм до выкатки.",
+    "project.demo-lab.b3":
+      "KŌRI — магазин. Фильтры по категории, цене и наличию, три режима сортировки, корзина переживает перезагрузку, промокоды и порог бесплатной доставки.",
+    "project.demo-lab.b4":
+      "ATELIER — запись в четыре шага. Календарь с заблокированными занятыми слотами, маска и валидация телефона, экран подтверждения со сводкой заказа.",
+    "project.demo-lab.b5":
+      "Все четыре предрендерятся статически. 3D-бандл вынесен в динамический импорт и не попадает в первую загрузку остальных страниц.",
+    "project.link.openDemos": "Открыть демо →",
 
     // Footer
     "footer.copyright":

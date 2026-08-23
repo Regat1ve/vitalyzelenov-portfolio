@@ -19,6 +19,7 @@ const linkKey: Record<string, string> = {
   "Playbook repo →": "project.link.playbookRepo",
   "Live site →": "project.link.liveSite",
   "Repo →": "project.link.repo",
+  "Open the demos →": "project.link.openDemos",
 };
 
 export function ProjectCard({ project }: { project: Project }) {

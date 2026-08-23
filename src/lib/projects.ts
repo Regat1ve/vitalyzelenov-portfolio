@@ -262,4 +262,60 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
+    slug: "demo-lab",
+    title: "Demo Lab",
+    status: "live",
+    role: "Author",
+    timeline: "Built in one day, August 2026",
+    summary:
+      "Four working interfaces built to be clicked, not looked at: a scroll-driven 3D product page, an analytics dashboard, a store with a persistent cart, and a four-step booking flow.",
+    bullets: [
+      "AURORA — React Three Fiber scene: shader-displaced geometry, particle shell, procedural environment from lightformers. No external models, no HDR files. Scroll drives camera, distortion and palette.",
+      "PULSE — analytics dashboard. Charts hand-written in SVG, no charting library. Crosshair tooltip, sortable table, filters. Palette validated for colour-vision deficiency before shipping.",
+      "KŌRI — storefront. Category, price and stock filters, three sort modes, cart that survives a reload, promo codes and a free-shipping threshold.",
+      "ATELIER — booking in four steps. Calendar with busy slots blocked, phone mask and validation, confirmation screen with the order summary.",
+      "All four are statically prerendered. The 3D bundle is a dynamic import, so it never touches the first load of the other pages.",
+    ],
+    stack: ["Next.js 16", "React 19", "TypeScript", "React Three Fiber", "Three.js", "Tailwind 4", "SVG"],
+    image: "/shots/demo-aurora.jpg",
+    imageAlt: "AURORA demo — a reflective distorted sphere inside a wireframe cage on a dark field",
+    links: [
+      { label: "Open the demos →", href: "/demos" },
+      { label: "Read case study →", href: "/projects/demo-lab" },
+    ],
+    caseStudy: {
+      tagline: "Four clickable interfaces, built in a day, to replace “here are my screenshots” with “here, try it”.",
+      problem:
+        "A portfolio of finished products has a gap: a stranger cannot poke at them. MedKompas needs a clinic account, newforms is mid-build. I wanted four things a client could open in one click and immediately understand what I can do — across four different kinds of work, not four variations of a landing page.",
+      approach: [
+        "Picked four jobs that cover the real spread of client requests: a wow-factor product page, a B2B data screen, an e-commerce flow, and lead capture.",
+        "3D scene built entirely from procedural geometry. drei's Environment fed by Lightformers gives real reflections with zero asset downloads — the page never waits on an HDR file.",
+        "Dashboard charts written by hand in SVG. Two series, one axis, a legend, direct end labels, and a crosshair. The palette was run through a CVD validator before a single line was drawn.",
+        "Store cart lives in localStorage behind try/catch, so a private window degrades to an in-memory cart instead of a blank screen.",
+        "Booking data is generated from a seeded PRNG, so the server and the browser render the same thing and there is no hydration mismatch.",
+      ],
+      aiSplit: {
+        claude: [
+          "First pass of the Tailwind layouts for all four screens.",
+          "Boilerplate for the sortable table and the filter reducers.",
+          "The scaffold of the R3F scene, before I rebalanced the composition.",
+        ],
+        me: [
+          "Every colour decision in the dashboard, and the choice to validate them instead of eyeballing.",
+          "The call to kill the emissive on the 3D material — it was washing out every reflection and making the object read flat.",
+          "Seeded randomness everywhere instead of Math.random, so renders stay pure and reproducible.",
+          "Cutting the scope to four demos when the first plan had six.",
+        ],
+      },
+      outcome:
+        "Live at /demos since August 2026. Now the first link in every cold message: a client clicks, filters something, adds to a cart, and the conversation starts from what the code does rather than from my CV.",
+      lessons: [
+        "A metal material with no environment map looks dead. Lightformers cost nothing and fix it — an HDR file is not the only way to get reflections.",
+        "Emissive fights reflection. If a surface looks flat, the self-illumination is usually the culprit, not the lighting.",
+        "Seed your randomness in anything server-rendered. Math.random in a component is both a hydration bug and a lint error waiting to happen.",
+        "Demos beat screenshots. A person who has clicked your filter already believes you can build filters.",
+      ],
+    },
+  },
 ];
