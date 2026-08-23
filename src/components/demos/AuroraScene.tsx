@@ -91,12 +91,20 @@ function Particles({ count = 900 }: { count?: number }) {
   const points = useRef<THREE.Points>(null);
 
   const positions = useMemo(() => {
+    // сид вместо Math.random: рендер остаётся чистым, картинка — одинаковой
+    let seed = 1337;
+    const rnd = () => {
+      seed = (seed + 0x6d2b79f5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
     const a = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       // shell distribution, so the core stays readable
-      const r = 2.4 + Math.random() * 4.2;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 2.4 + rnd() * 4.2;
+      const theta = rnd() * Math.PI * 2;
+      const phi = Math.acos(2 * rnd() - 1);
       a[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       a[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.6;
       a[i * 3 + 2] = r * Math.cos(phi);

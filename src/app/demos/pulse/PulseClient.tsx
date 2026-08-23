@@ -247,8 +247,9 @@ export function PulseClient() {
   const toggle = (k: keyof Order) =>
     setSort((s) => (s.k === k ? { k, dir: (s.dir * -1) as 1 | -1 } : { k, dir: -1 }));
 
-  const Th = ({ k, label, right }: { k: keyof Order; label: string; right?: boolean }) => (
-    <th className={`px-4 py-3 font-medium ${right ? "text-right" : ""}`}>
+  // обычная функция, а не компонент: иначе React пересоздаёт его на каждый рендер
+  const th = (k: keyof Order, label: string, right = false) => (
+    <th key={k} className={`px-4 py-3 font-medium ${right ? "text-right" : ""}`}>
       <button onClick={() => toggle(k)} className="inline-flex items-center gap-1 hover:text-white">
         {label}
         <span className="text-[10px] opacity-60">{sort.k === k ? (sort.dir === 1 ? "▲" : "▼") : "↕"}</span>
@@ -356,12 +357,12 @@ export function PulseClient() {
             <table className="w-full min-w-[680px] text-left text-sm">
               <thead className="text-xs uppercase tracking-wider text-[#8b8b85]">
                 <tr className="border-b border-white/[0.08]">
-                  <Th k="id" label="Заказ" />
-                  <Th k="client" label="Клиент" />
-                  <Th k="city" label="Город" />
-                  <Th k="status" label="Статус" />
-                  <Th k="items" label="Позиций" right />
-                  <Th k="sum" label="Сумма" right />
+                  {th("id", "Заказ")}
+                  {th("client", "Клиент")}
+                  {th("city", "Город")}
+                  {th("status", "Статус")}
+                  {th("items", "Позиций", true)}
+                  {th("sum", "Сумма", true)}
                 </tr>
               </thead>
               <tbody>

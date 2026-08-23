@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Product = {
   id: string;
@@ -51,27 +51,31 @@ export function KoriClient() {
   const [open, setOpen] = useState(false);
   const [promo, setPromo] = useState("");
   const [applied, setApplied] = useState<string | null>(null);
-  const [ready, setReady] = useState(false);
+  // ref, а не state: флаг «гидрация прошла» не должен вызывать перерисовку
+  const hydrated = useRef(false);
 
   // корзина переживает перезагрузку — но localStorage может быть недоступен
   useEffect(() => {
     try {
+      // Поднять сохранённую корзину можно только после гидрации: на сервере localStorage
+      // нет, а чтение в первом рендере разошлось бы с серверной разметкой.
       const raw = localStorage.getItem(CART_KEY);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (raw) setCart(JSON.parse(raw));
     } catch {
       /* приватный режим или заблокированные куки — просто стартуем с пустой корзиной */
     }
-    setReady(true);
+    hydrated.current = true;
   }, []);
 
   useEffect(() => {
-    if (!ready) return;
+    if (!hydrated.current) return;
     try {
       localStorage.setItem(CART_KEY, JSON.stringify(cart));
     } catch {
       /* не критично: корзина живёт в памяти до перезагрузки */
     }
-  }, [cart, ready]);
+  }, [cart]);
 
   const list = useMemo(() => {
     const f = PRODUCTS.filter(
