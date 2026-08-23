@@ -579,6 +579,7 @@
 
   function draw(now) {
     ctx.setTransform(px, 0, 0, px, 0, 0);
+    ctx.imageSmoothingEnabled = true;    // спрайт 192 px тянется на 60..230 — сглаживание нужно
     ctx.clearRect(0, 0, W, H);
 
     let sx = 0, sy = 0;
