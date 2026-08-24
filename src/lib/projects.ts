@@ -331,7 +331,7 @@ export const projects: Project[] = [
       "Reforge fixes the genre's worst moment: a lone ingot buried under the pile with its pair unreachable. Heat builds from every fusion; a full meter spends on one targeted weld.",
       "Fixed 60 Hz timestep with a substep accumulator, so a 144 Hz laptop and a throttled phone run identical physics instead of drifting apart.",
       "The basin height adapts to the viewport shape — a tall phone gets a deeper forge — and the floor body moves with it rather than the field being letterboxed.",
-      "Sprites are generated, not drawn by hand: a billet with an inlaid ingot, flat three-tone shading, supersampled 4x. A build-time assert fails if a sprite stops filling its collision circle, which is what caused visible gaps between resting bodies in the first pass.",
+      "Bodies are the ingots themselves, not circles wearing an ingot picture. Round bodies forced a disc backing under every sprite to hide the gaps between them; making the collision shape the trapezoid deleted the backing and the gaps in one move.",
       "Tier palette run through a colour-vision-deficiency validator before anything was rendered: worst adjacent pair ΔE 17.4 under deuteranopia. Warm and cool alternate up the ladder so neighbours never blur together.",
       "Sound is synthesised in WebAudio — a noise transient through a bandpass plus two detuned triangles, pitched by tier. No audio files ship at all, and it mutes on tab blur and during ads, as the platform requires.",
       "Yandex Games SDK is optional at runtime: leaderboard, interstitials and language detection when the platform is there, a plain game when it is not.",
@@ -363,7 +363,7 @@ export const projects: Project[] = [
         me: [
           "The Reforge mechanic — what it costs, what happens on a miss, and why a failed strike must not spend the meter.",
           "Killing eight separate Blender renders. Mirror-finish metal reflects an almost-black world, so silver and platinum came out black; one neutral render tinted per tier was both better looking and controllable.",
-          "Catching that the sprites had a transparent margin and a 14% squash, which is what put visible gaps between resting bodies — a rendering bug that reads as a physics bug.",
+          "Refusing to keep patching the art around a round collision shape, and changing the shape instead. Every earlier fix — a disc backing, a zero-margin assert — was paying rent on the wrong decision.",
           "Deciding the chain multiplier was worth the volatility. A seven-link cascade paying +168 is the moment people replay for.",
         ],
       },
@@ -371,7 +371,7 @@ export const projects: Project[] = [
         "Live and playable in the browser and on a phone. A full run lands around three to four minutes, all eight tiers are reachable, and the whole thing weighs under half a megabyte including the physics engine.",
       lessons: [
         "Check the shop before designing. Ten minutes in the catalogue replaced a whole argument about what format to build.",
-        "A gap between two circles that are touching is not a physics bug. Measure the sprite before you touch the solver — the transparent margin was 12.5% and the collision radius was right all along.",
+        "When the art keeps needing workarounds, the collision shape is usually the thing that is wrong. A disc painted under every ingot hid the gaps; making the body the ingot removed the reason for both.",
         "Never render a mirror metal against a dark world. Metallic 1.0 has no diffuse component, so the object shows you the room, and the room was black.",
         "Fixed timestep is not premature. Variable delta physics works perfectly on the machine you wrote it on and nowhere else.",
         "Give a spent resource a refund path. The hammer staying raised after a miss is three lines of code and it is the difference between a mechanic people use and one they are afraid of.",

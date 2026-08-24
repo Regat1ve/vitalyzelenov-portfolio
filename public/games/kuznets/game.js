@@ -9,7 +9,7 @@
 (() => {
   "use strict";
 
-  const { Engine, Composite, Bodies, Body, Events } = Matter;
+  const { Engine, Composite, Bodies, Body, Events, Vertices } = Matter;
 
   // ── Константы поля ──────────────────────────────────────────────
 
@@ -23,7 +23,14 @@
   const DROP_COOLDOWN = 320;
   const MAX_TIER = 8;
 
-  const R = [0, 30, 36, 44, 53, 65, 78, 95, 115];
+  const R = [0, 30, 36, 44, 53, 65, 78, 95, 115];   // масштаб тира, от него пляшут эффекты
+
+  // Слиток — не круг: тело в физике повторяет силуэт спрайта, поэтому лежащие
+  // слитки касаются друг друга гранями и подложка под ними больше не нужна.
+  // Меняешь SLOPE или ASPECT — перерисуй assets/make_ingots.py теми же числами.
+  const SLOPE = 0.20;         // верхняя грань уже нижней на эту долю
+  const ASPECT = 1.55;        // ширина к высоте
+  const SHAPE = [];           // {w, h, dy} — габарит спрайта и снос центроида
   const SCORE = [0, 0, 2, 5, 9, 15, 24, 38, 60];
   const HEAT = [0, 0, 6, 9, 13, 18, 24, 32, 42];
   const CHAIN_MS = 800;
@@ -128,6 +135,14 @@
   const consumed = new Set();
   const pendingMerges = [];
 
+  // центр масс трапеции ниже центра габарита — спрайт кладём со сносом,
+  // иначе картинка съедет относительно тела
+  for (let t = 1; t <= MAX_TIER; t++) {
+    const h = R[t] * 1.42, w = h * ASPECT;
+    const probe = Bodies.trapezoid(0, 0, w, h, SLOPE);
+    SHAPE[t] = { w, h, dy: (probe.bounds.min.y + probe.bounds.max.y) / 2 - probe.position.y };
+  }
+
   const floor = Bodies.rectangle(W / 2, H + 30, W + 240, 60, { isStatic: true });
   Composite.add(world, [
     floor,
@@ -228,7 +243,7 @@
 
   // ── Яндекс SDK: работает и без него ─────────────────────────────
 
-  const YS = { sdk: null, lb: false };
+  const YS = { sdk: null, lb: false, player: null };
 
   /** SDK живёт только на площадке: вне её тег ничего не грузит и не сорит в консоль. */
   function loadSdkScript() {
@@ -254,7 +269,26 @@
       if (lang && STR[lang]) L = STR[lang];
       // getLeaderboards() устарел и бросает — метод проверяем через isAvailableMethod
       try { YS.lb = await YS.sdk.isAvailableMethod("leaderboards.setScore"); } catch { YS.lb = false; }
+      await loadCloud();
     } catch { /* играем без платформы */ }
+  }
+
+  /** Рекорд и настройки живут в облаке игрока, localStorage — запасной вариант. */
+  async function loadCloud() {
+    try {
+      YS.player = await YS.sdk.getPlayer({ scopes: false });
+      const data = await YS.player.getData(["best", "muted"]);
+      if (typeof data.best === "number" && data.best > S.best) {
+        S.best = data.best;
+        localStorage.setItem("kuznets.best", String(S.best));
+      }
+      if (typeof data.muted === "boolean") SND.muted = data.muted;
+    } catch { /* гость или метод недоступен — играем на локальном рекорде */ }
+  }
+
+  function saveCloud() {
+    if (!YS.player) return;
+    Promise.resolve(YS.player.setData({ best: S.best, muted: SND.muted }, false)).catch(() => {});
   }
 
   function sdkReady() { try { YS.sdk?.features?.LoadingAPI?.ready(); } catch {} }
@@ -363,10 +397,10 @@
   }
 
   function spawn(tier, x, y, vx = 0, vy = 0) {
-    const b = Bodies.circle(x, y, R[tier], {
-      restitution: 0.12,
-      friction: 0.36,
-      frictionStatic: 0.6,
+    const b = Bodies.trapezoid(x, y, SHAPE[tier].w, SHAPE[tier].h, SLOPE, {
+      restitution: 0.10,
+      friction: 0.30,
+      frictionStatic: 0.5,
       density: 0.0011,
       slop: 0.02,
     });
@@ -481,7 +515,7 @@
   function orbAt(x, y) {
     for (let i = orbs.length - 1; i >= 0; i--) {
       const o = orbs[i];
-      if (Math.hypot(o.position.x - x, o.position.y - y) <= o.circleRadius) return o;
+      if (Vertices.contains(o.vertices, { x, y })) return o;
     }
     return null;
   }
@@ -523,7 +557,7 @@
   }
 
   function clampAim(x) {
-    const r = R[S.holdTier];
+    const r = SHAPE[S.holdTier].w / 2;
     return Math.max(r + 4, Math.min(W - r - 4, x));
   }
 
@@ -562,6 +596,9 @@
 
   stage.addEventListener("pointercancel", () => {});
 
+  // площадка требует убрать браузерное меню с поля: правый клик и долгий тап
+  stage.addEventListener("contextmenu", (e) => e.preventDefault());
+
   elHammer.addEventListener("click", () => (S.armed ? disarm() : arm()));
 
   window.addEventListener("keydown", (e) => {
@@ -576,6 +613,7 @@
     SND.muted = !SND.muted;
     localStorage.setItem("kuznets.muted", SND.muted ? "1" : "0");
     e.currentTarget.classList.toggle("off", SND.muted);
+    saveCloud();
   });
 
   // ── Отрисовка ───────────────────────────────────────────────────
@@ -630,7 +668,7 @@
       ctx.lineWidth = 1.5;
       ctx.strokeStyle = "rgba(255,170,90,.28)";
       ctx.beginPath();
-      ctx.moveTo(S.aimX, DROP_Y + R[S.holdTier]);
+      ctx.moveTo(S.aimX, DROP_Y + SHAPE[S.holdTier].h / 2);
       ctx.lineTo(S.aimX, H - 8);
       ctx.stroke();
       ctx.restore();
@@ -688,25 +726,35 @@
     ctx.restore();
   }
 
+  /** Контур слитка в системе координат тела — тот же, что у Bodies.trapezoid. */
+  function ingotPath(s) {
+    const half = s.w / 2, top = half * (1 - SLOPE);
+    const y0 = s.dy - s.h / 2, y1 = s.dy + s.h / 2;
+    ctx.beginPath();
+    ctx.moveTo(-half, y1);
+    ctx.lineTo(half, y1);
+    ctx.lineTo(top, y0);
+    ctx.lineTo(-top, y0);
+    ctx.closePath();
+  }
+
   function drawOrb(tier, x, y, angle, alpha, highlight) {
     const im = IMG[tier];
-    const r = R[tier];
+    const s = SHAPE[tier];
     ctx.save();
     ctx.globalAlpha = alpha;
     ctx.translate(x, y);
     if (angle) ctx.rotate(angle);
-    if (im && im.width) ctx.drawImage(im, -r, -r, r * 2, r * 2);
+    if (im && im.width) ctx.drawImage(im, -s.w / 2, s.dy - s.h / 2, s.w, s.h);
     else {
       ctx.fillStyle = TINT[tier];
-      ctx.beginPath();
-      ctx.arc(0, 0, r, 0, Math.PI * 2);
+      ingotPath(s);
       ctx.fill();
     }
     if (highlight) {
       ctx.strokeStyle = "#fff";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(0, 0, r + 2, 0, Math.PI * 2);
+      ctx.lineWidth = 3;
+      ingotPath(s);
       ctx.stroke();
     }
     ctx.restore();
@@ -758,7 +806,7 @@
       let over = false;
       for (const b of orbs) {
         if (now - b.born < SPAWN_GRACE) continue;
-        if (b.position.y - b.circleRadius < DEATH_Y && b.speed < 1.1) { over = true; break; }
+        if (b.bounds.min.y < DEATH_Y && b.speed < 1.1) { over = true; break; }
       }
       S.deathT = over ? S.deathT + dt : 0;
       if (S.deathT > DEATH_HOLD) gameOver();
@@ -811,6 +859,7 @@
       S.best = S.score;
       localStorage.setItem("kuznets.best", String(S.best));
       elBest.textContent = S.best;
+      saveCloud();
     }
     sdkScore(S.score);
 

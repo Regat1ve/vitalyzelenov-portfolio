@@ -162,7 +162,7 @@ const dict = {
     "project.kuznets.b4":
       "The basin height adapts to the viewport shape — a tall phone gets a deeper forge — and the floor body moves with it rather than the field being letterboxed.",
     "project.kuznets.b5":
-      "Sprites are generated, not drawn by hand, and a build-time assert fails if one stops filling its collision circle — that margin is what put visible gaps between resting bodies in the first pass.",
+      "Bodies are the ingots themselves, not circles wearing an ingot picture — the collision shape is the same trapezoid as the sprite, so resting ingots touch face to face and need no disc painted underneath.",
     "project.kuznets.b6":
       "Tier palette run through a colour-vision-deficiency validator before anything was rendered: worst adjacent pair ΔE 17.4 under deuteranopia. Warm and cool alternate up the ladder so neighbours never blur together.",
     "project.kuznets.b7":
@@ -397,7 +397,7 @@ const dict = {
     "project.kuznets.b4":
       "Высота горна подстраивается под форму экрана — на вытянутом телефоне бассейн глубже, — и пол двигается вместе с ней, вместо того чтобы обрамлять поле пустыми полями.",
     "project.kuznets.b5":
-      "Спрайты генерируются, а не рисуются руками, и сборка падает по assert, если спрайт перестал заполнять свой физический круг — именно эти поля давали видимые дыры между лежащими телами в первой версии.",
+      "Тело в физике — сам слиток, а не круг с картинкой слитка: форма тела повторяет силуэт спрайта, поэтому лежащие слитки касаются гранями и подложка под ними не нужна.",
     "project.kuznets.b6":
       "Палитра тиров прогнана через валидатор на дальтонизм до того, как был отрисован первый спрайт: худшая соседняя пара ΔE 17.4 при дейтеранопии. Тёплые и холодные чередуются по лестнице, поэтому соседи никогда не сливаются.",
     "project.kuznets.b7":
