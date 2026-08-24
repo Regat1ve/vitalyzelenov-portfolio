@@ -596,8 +596,9 @@
 
   stage.addEventListener("pointercancel", () => {});
 
-  // площадка требует убрать браузерное меню с поля: правый клик и долгий тап
-  stage.addEventListener("contextmenu", (e) => e.preventDefault());
+  // площадка требует убрать браузерное меню из игры: правый клик и долгий тап.
+  // Вешаем на документ, а не на поле: кнопки и лестница тоже часть игры.
+  document.addEventListener("contextmenu", (e) => e.preventDefault());
 
   elHammer.addEventListener("click", () => (S.armed ? disarm() : arm()));
 
