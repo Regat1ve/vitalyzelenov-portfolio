@@ -59,7 +59,7 @@ const dict = {
 
     // Projects section
     "projects.eyebrow": "Projects",
-    "projects.headline": "Six things I shipped this year.",
+    "projects.headline": "Eight things I shipped this year.",
     "projects.status.live": "Live",
     "projects.status.pre-launch": "Pre-launch",
     "projects.status.in-progress": "In progress",
@@ -294,7 +294,7 @@ const dict = {
 
     // Projects section
     "projects.eyebrow": "Проекты",
-    "projects.headline": "Шесть штук, которые я выпустил в этом году.",
+    "projects.headline": "Восемь штук, которые я выпустил в этом году.",
     "projects.status.live": "В проде",
     "projects.status.pre-launch": "Предзапуск",
     "projects.status.in-progress": "В работе",

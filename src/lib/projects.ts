@@ -263,6 +263,123 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "timesheet-costs",
+    title: "Timesheet & Costs",
+    status: "open-source",
+    role: "Solo — backend, frontend, code review",
+    timeline: "Take-home brief, 4-day deadline, August 2026",
+    summary:
+      "Project time tracking where the money is always recomputed, never stored. Rates change retroactively by design, so a timesheet row keeps hours and a date — the cost is derived at read time from whichever rate was in force on that day. .NET 8 + MongoDB behind a React table, plus a written review of someone else's handler and page.",
+    bullets: [
+      "The rate is resolved inside the aggregation, not denormalised into the row. The brief allows backdated rate edits; a stored amount would go quietly stale and nobody would ever notice.",
+      "Rows, totals and the row count come back in one $facet round trip. Sorting, skip and limit run before the $lookup, so the join only touches the page being shown.",
+      "Money is Decimal128 in Mongo and decimal in C#, rounded half-to-even on both sides — because $round already rounds that way, and a report that disagrees with the row it sums is worse than one that is off by a kopeck.",
+      "Business rules live in one pure class: the half-hour step, the 24-hour ceiling, the daily limit, the overtime flag past 12 hours, the closed-period lock. 34 unit tests hit it without a database in sight.",
+      "Editing checks a version predicate inside the update filter. Two people on the same row means the second one is told, not silently overwritten.",
+      "16 acceptance tests run against a real mongod via EphemeralMongo — the aggregation is the product here, and mocking it would have tested nothing.",
+      "The second half of the brief was a review of existing code: 12 problems in the C# handler, 16 in the React page, each with the fixed version next to it.",
+    ],
+    stack: [".NET 8", "C#", "MongoDB", "React", "TypeScript", "Vite", "xUnit"],
+    image: "/projects/timesheet-costs.jpg",
+    imageAlt: "Timesheet table — date, employee, project, hours, rate and cost columns with a filtered total row",
+    links: [
+      { label: "Read case study →", href: "/projects/timesheet-costs" },
+      { label: "Repo →", href: "https://github.com/Regat1ve/timesheet-costs" },
+    ],
+    caseStudy: {
+      tagline: "A costing service where the number is derived, not remembered — and a code review that came with the fixes attached.",
+      problem:
+        "Track hours per employee per project, price them, report on them. The trap is one line in the brief: an hourly rate has a start date and can be changed after the fact. That single sentence rules out the obvious design, where the row stores the money it cost. There is no rate-change endpoint to hang a recalculation off, so a stored amount would drift away from the truth with nothing to catch it.",
+      approach: [
+        "Kept the row honest: hours, a date, who and which project. The rate that applied on that day is picked inside the pipeline with $sortArray plus $first, and the cost is computed from it on every read.",
+        "Paid the read cost knowingly. Recomputing is more work per query than reading a stored field — but with the aggregation indexed and the join deferred until after paging, that work is bounded, and correctness is not.",
+        "Matched the rounding on both sides of the wire. Mongo's $round is half-to-even, so the C# side uses MidpointRounding.ToEven rather than the default. Two rounding modes in one system is a bug that surfaces months later in a total nobody can explain.",
+        "Pulled every rule out of the service into a class with no dependencies, so the interesting logic is testable without spinning anything up.",
+        "Ran the acceptance tests against a real mongod instead of a mock. Everything worth getting wrong here lives inside the aggregation, and a mocked driver would have agreed with whatever I wrote.",
+      ],
+      aiSplit: {
+        claude: [
+          "First pass of the aggregation stages and the BsonDocument scaffolding, which is tedious to type and easy to typo.",
+          "The React table, filters and dialogs.",
+          "Boilerplate for the test fixtures and the seed data.",
+        ],
+        me: [
+          "The decision to compute the cost at read time. The first draft stored it on the row, which is faster and wrong.",
+          "Catching the rounding mismatch. Half-to-even on one side and half-away-from-zero on the other is invisible in tests with round numbers and obvious in production.",
+          "Insisting on real integration tests. Mocking the driver would have made the suite green and meaningless.",
+          "The review half: reading someone else's handler line by line and writing why each fix matters, not just what it changes.",
+        ],
+      },
+      outcome:
+        "Delivered inside the four-day window with 50 tests passing from a clean clone. Backdating a rate change moves every affected report immediately, which is the behaviour the brief asked for and the one a stored amount cannot give you.",
+      lessons: [
+        "If a value can be edited behind your back, storing its consequences is a bug on a delay. Derive it while you can still afford to.",
+        "Rounding is part of the contract between the database and the application. Pick one mode and write down why.",
+        "Page before you join. Sorting and limiting ahead of the $lookup is the difference between joining a page and joining a table.",
+        "A code review is worth more with the corrected file attached. 'This is racy' starts an argument; a diff ends it.",
+      ],
+    },
+  },
+  {
+    slug: "vitaly-card",
+    title: "Card as a Service",
+    status: "live",
+    role: "Solo — schema, API, page, delivery",
+    timeline: "Take-home brief, one day, August 2026",
+    summary:
+      "A business card that is a service, not a page. The content lives in PostgreSQL, GraphQL is the only way in, and the page a human sees is an ordinary client of that same API. One source of truth, no copy of the content sitting in the markup.",
+    bullets: [
+      "Code-first GraphQL: the schema is generated from TypeScript types, so the SDL cannot drift from the code. schema.gql is not committed — a generated file in git is a stale file waiting to happen.",
+      "Relations resolve on demand. Asking for a name does not touch the links, skills or projects tables.",
+      "The stack filter runs in PostgreSQL as an array operation. Fetching everything and filtering in Node is invisible at five rows and painful at five thousand.",
+      "CI does not just run tests: it builds the image, starts it next to PostgreSQL, waits for /health to report the database up, then fires a real query and a deliberately broken mutation at it.",
+      "That paid for itself three times over. Prisma would not boot on Alpine for want of OpenSSL, writing the schema file crashed the serverless build on a read-only filesystem, and the static page 404'd from a path that does not exist in the bundle. All three were green on my machine.",
+      "The single HTML page is compiled into the build at prebuild instead of being served off disk, so nothing in production has to guess where a file landed.",
+      "Skill levels are three honest steps — write it daily, shipped it once, tried it — rather than a percentage. NestJS and GraphQL sit on the bottom step, because this project is where I met them.",
+    ],
+    stack: ["NestJS", "GraphQL", "Prisma", "PostgreSQL", "TypeScript", "Docker", "GitHub Actions"],
+    image: "/projects/vitaly-card.jpg",
+    imageAlt: "Dark business card page — name, skill grid by category, project list, rendered from the GraphQL API",
+    links: [
+      { label: "Read case study →", href: "/projects/vitaly-card" },
+      { label: "Open the card →", href: "https://vitaly-card.vercel.app" },
+      { label: "Repo →", href: "https://github.com/Regat1ve/vitaly-card" },
+    ],
+    caseStudy: {
+      tagline: "Build a business card with Git, TypeScript, NestJS, Prisma, GraphQL and Docker — so I built the card as a service and let the page be a client.",
+      problem:
+        "The brief listed a stack and asked for a card. The lazy reading is a static page with the stack listed in a footer. The useful reading is: the content is data, so put it in a database, expose it properly, and let the page render from the same API anyone else would call. That way the technologies are doing work instead of appearing in a list.",
+      approach: [
+        "Modelled the card first — profile, links, skills, projects, contact requests — then let the GraphQL schema fall out of those types. Code-first means one source, so the SDL and the code cannot disagree.",
+        "Made the contact mutation actually write to the database, with validation that names the offending fields. A mutation that returns a stub proves nothing.",
+        "Rate-limited it, because the card is public and the mutation writes. The stock throttler guard does not understand GraphQL context, so the request lookup is overridden.",
+        "Pointed the health check at the database. 'ok' from a process that cannot see PostgreSQL is a green light that means nothing — the Docker HEALTHCHECK uses the same endpoint.",
+        "Made CI start the container next to a real database and interrogate it. That is the only reason the three delivery bugs were found before a reviewer found them.",
+      ],
+      aiSplit: {
+        claude: [
+          "First pass of the resolvers, DTOs and the Prisma schema.",
+          "The Dockerfile and compose skeleton.",
+          "The static page markup before I rewrote the copy.",
+        ],
+        me: [
+          "The decision to make the page a client of the API rather than a second copy of the content.",
+          "Reading every CI failure as a real defect instead of a CI quirk — Alpine and OpenSSL, the read-only filesystem, the missing path. Each one would have broken for the reviewer too.",
+          "Refusing to ship a percentage next to a skill. Three steps that mean something beat a number that means nothing.",
+          "Leaving contactRequests out of the schema on purpose, so form submissions cannot be read back by strangers.",
+        ],
+      },
+      outcome:
+        "Live at vitaly-card.vercel.app with the sandbox open at /graphql and the service state at /health. Green CI here means the image builds, the container starts, and the API answers a real query — not that the files compiled.",
+      lessons: [
+        "Content in a database and a page that queries it is less work than content pasted into markup twice.",
+        "A build that is only ever run on your own machine is not tested. A clean machine has no OpenSSL, no writable disk and none of your folders.",
+        "Serverless is not a container. Anything that writes to the filesystem at boot will find that out for you.",
+        "Say which skills are new. Putting GraphQL on the bottom step cost nothing and made the rest of the list believable.",
+      ],
+    },
+  },
+  {
     slug: "demo-lab",
     title: "Demo Lab",
     status: "live",
