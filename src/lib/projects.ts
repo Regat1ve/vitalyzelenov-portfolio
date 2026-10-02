@@ -87,6 +87,62 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "radar-core",
+    title: "radar-core",
+    status: "open-source",
+    role: "Solo — backend, workers, infra, tests",
+    timeline: "September 2026 · public repo, CI on every push",
+    summary:
+      "A backend service that collects job postings from external sources on a schedule, normalises them into one shape and serves them through an API and a server-rendered UI. Built to close a gap in my stack — Django and Celery — with a working system rather than a line on a CV.",
+    bullets: [
+      "Five services in Docker Compose: web, Celery worker, Celery beat, PostgreSQL 16, Redis. Migrations, static files and the admin user are applied on start.",
+      "Idempotent ingestion: a unique constraint on (source, external_id). Re-running a collection gives created=0, duplicate=5 instead of copies.",
+      "Retries split by failure class: 429, 5xx and timeouts retry with backoff and jitter, other 4xx fail at once. One ImportRun row with attempts=4, not four rows that skew the stats.",
+      "Redis lock (SET NX EX) so a scheduled run and a manual run never collect the same source twice. The TTL means a killed worker cannot lock a source forever.",
+      "N+1 removed: 101 queries per 100 rows down to 1 with select_related, pinned by a django_assert_num_queries test. A composite index took one query from 2.261 ms to 0.034 ms on 50,000 rows.",
+      "38 pytest tests run against real PostgreSQL in GitHub Actions on every push.",
+    ],
+    stack: ["Python", "Django 5", "Django REST Framework", "Celery", "Redis", "PostgreSQL 16", "Docker Compose", "pytest", "GitHub Actions"],
+    image: "/projects/radar-core.png",
+    imageAlt: "radar-core vacancy list — filterable table of collected postings with source and salary columns",
+    links: [
+      { label: "Read case study →", href: "/projects/radar-core" },
+      { label: "Repo →", href: "https://github.com/Regat1ve/radar-core" },
+    ],
+    caseStudy: {
+      tagline: "A scheduled data collector where every engineering claim in the README comes with the log line that proves it.",
+      problem:
+        "Pulling data from someone else's API on a timer looks trivial and fails in boring ways: the same posting arrives twice, a source returns 429 for an hour, a manual run overlaps the schedule, a list page quietly fires a hundred queries. I wanted one small system that handles each of these on purpose — on a stack I had not shipped before.",
+      approach: [
+        "Made duplicates impossible at the database level, not in application code: a unique constraint, and an upsert that counts created vs duplicate.",
+        "Moved the network into its own module that turns every response into one of two errors. Only the retryable one is retried, with jittered backoff so a dozen sources failing together do not come back together.",
+        "Modelled a collection run, not an HTTP attempt. Four attempts stay one row with an attempts counter and the failure history.",
+        "Put one filtering function behind both the API and the HTML page, so they cannot drift and performance gets fixed in one place.",
+        "Measured before indexing: EXPLAIN on 50,000 seeded rows, then a composite index, then EXPLAIN again with the Sort step gone.",
+      ],
+      aiSplit: {
+        claude: [
+          "Models, serializers, templates and the Bootstrap UI.",
+          "Test scaffolding and the seed command for the 50,000-row benchmark.",
+          "First drafts of the Celery tasks and the Compose file.",
+        ],
+        me: [
+          "Which failures retry and which do not, and what one ImportRun means.",
+          "Running everything on the real stack instead of SQLite, which is where the bugs below surfaced.",
+          "Catching that beat crashed before migrations were applied, that `build: .` on three services produced three different images, and that a template default turned an honest zero into 'no data'.",
+          "Reproducing the first red CI run locally — the manifest static storage needs collectstatic, the workflow had no such step — and fixing it.",
+        ],
+      },
+      outcome:
+        "Public repository with green CI, 38 tests and a README where each decision is paired with the evidence: a constraint error, a retry log, a query count, an EXPLAIN plan.",
+      lessons: [
+        "A green build on SQLite proves very little. Four of the real bugs only appeared with Postgres, Redis and three containers running together.",
+        "Decide what to retry before writing the retry. Retrying a 404 is just a slower failure.",
+        "Pin performance fixes with a test. A query count assertion stops the N+1 from coming back on the next refactor.",
+      ],
+    },
+  },
+  {
     slug: "newforms",
     title: "newforms",
     status: "in-progress",
